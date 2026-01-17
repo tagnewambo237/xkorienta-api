@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Mathématiques",
+    "code": "MATH",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME", "2NDE", "1ERE_A", "1ERE_C", "1ERE_D", "1ERE_TI", "TLE_A", "TLE_C", "TLE_D", "TLE_TI"],
+    "applicableFieldCodes": ["SERIE_A", "SERIE_C", "SERIE_D", "SERIE_TI", "COMP_SCIENCES_COLLEGE"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Mathématiques",
+        "en": "Mathematics"
+      },
+      "description": "Algèbre, Géométrie, Analyse",
+      "icon": "calculator",
+      "color": "#3B82F6",
+      "coefficient": 4
+    }
+  },
+  {
+    "name": "Physique-Chimie",
+    "code": "PC",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["4EME", "3EME", "2NDE", "1ERE_C", "1ERE_D", "1ERE_TI", "TLE_C", "TLE_D", "TLE_TI"],
+    "applicableFieldCodes": ["SERIE_C", "SERIE_D", "SERIE_TI", "COMP_SCIENCES_COLLEGE"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Physique-Chimie",
+        "en": "Physics & Chemistry"
+      },
+      "description": "Sciences physiques et chimiques",
+      "icon": "atom",
+      "color": "#8B5CF6",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "SVT (Sciences de la Vie et de la Terre)",
+    "code": "SVT",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME", "2NDE", "1ERE_D", "TLE_D"],
+    "applicableFieldCodes": ["SERIE_D", "COMP_SCIENCES_COLLEGE"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "SVT",
+        "en": "Life & Earth Sciences"
+      },
+      "description": "Biologie, Géologie",
+      "icon": "microscope",
+      "color": "#10B981",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "Français",
+    "code": "FRANCAIS",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME", "2NDE", "1ERE_A", "1ERE_C", "1ERE_D", "1ERE_TI", "TLE_A", "TLE_C", "TLE_D", "TLE_TI"],
+    "applicableFieldCodes": ["SERIE_A", "SERIE_C", "SERIE_D", "SERIE_TI", "COMP_LETTRES_COLLEGE"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Français",
+        "en": "French"
+      },
+      "description": "Langue et Littérature française",
+      "icon": "book-open",
+      "color": "#EC4899",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "Anglais",
+    "code": "ANGLAIS",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME", "2NDE", "1ERE_A", "1ERE_C", "1ERE_D", "1ERE_TI", "TLE_A", "TLE_C", "TLE_D", "TLE_TI"],
+    "applicableFieldCodes": ["SERIE_A", "SERIE_C", "SERIE_D", "SERIE_TI"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Anglais",
+        "en": "English"
+      },
+      "description": "Langue anglaise",
+      "icon": "globe",
+      "color": "#F59E0B",
+      "coefficient": 2
+    }
+  },
+  {
+    "name": "Histoire-Géographie",
+    "code": "HIST_GEO",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME", "2NDE", "1ERE_A", "1ERE_C", "1ERE_D", "TLE_A"],
+    "applicableFieldCodes": ["SERIE_A", "COMP_LETTRES_COLLEGE"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Histoire-Géographie",
+        "en": "History-Geography"
+      },
+      "description": "Sciences humaines",
+      "icon": "map",
+      "color": "#06B6D4",
+      "coefficient": 2
+    }
+  },
+  {
+    "name": "Philosophie",
+    "code": "PHILO",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["TLE_A", "TLE_C", "TLE_D"],
+    "applicableFieldCodes": ["SERIE_A", "SERIE_C", "SERIE_D"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Philosophie",
+        "en": "Philosophy"
+      },
+      "description": "Réflexion philosophique",
+      "icon": "lightbulb",
+      "color": "#A855F7",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "Informatique",
+    "code": "INFO",
+    "subSystem": "FRANCOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["3EME", "2NDE", "1ERE_C", "1ERE_D", "1ERE_TI", "TLE_C", "TLE_D", "TLE_TI"],
+    "applicableFieldCodes": ["SERIE_C", "SERIE_D", "SERIE_TI"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Informatique",
+        "en": "Computer Science"
+      },
+      "description": "Algorithmique et programmation",
+      "icon": "code",
+      "color": "#14B8A6",
+      "coefficient": 2
+    }
+  }
+]

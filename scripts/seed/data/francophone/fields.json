@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Série A (Littéraire)",
+    "code": "SERIE_A",
+    "category": "SERIE",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "applicableLevelCodes": ["1ERE_A", "TLE_A"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Série A",
+        "en": "Series A (Literary)"
+      },
+      "description": "Série littéraire - Focus sur lettres, philosophie, langues",
+      "icon": "book",
+      "color": "#8B5CF6"
+    }
+  },
+  {
+    "name": "Série C (Scientifique)",
+    "code": "SERIE_C",
+    "category": "SERIE",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "applicableLevelCodes": ["1ERE_C", "TLE_C"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Série C",
+        "en": "Series C (Scientific)"
+      },
+      "description": "Maths et Sciences Physiques",
+      "icon": "calculator",
+      "color": "#3B82F6"
+    }
+  },
+  {
+    "name": "Série D (Scientifique)",
+    "code": "SERIE_D",
+    "category": "SERIE",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "applicableLevelCodes": ["1ERE_D", "TLE_D"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Série D",
+        "en": "Series D (Scientific)"
+      },
+      "description": "Maths et Sciences Naturelles (SVT)",
+      "icon": "microscope",
+      "color": "#10B981"
+    }
+  },
+  {
+    "name": "Série TI (Technique Industrielle)",
+    "code": "SERIE_TI",
+    "category": "SERIE",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "applicableLevelCodes": ["1ERE_TI", "TLE_TI"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Série TI",
+        "en": "Series TI (Industrial Technology)"
+      },
+      "description": "Technique Industrielle - Électrotechnique, Mécanique, etc.",
+      "icon": "cog",
+      "color": "#F59E0B"
+    }
+  },
+  {
+    "name": "Groupe de Compétences - Sciences",
+    "code": "COMP_SCIENCES_COLLEGE",
+    "category": "COMPETENCE_GROUP",
+    "cycle": "COLLEGE",
+    "subSystem": "FRANCOPHONE",
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Sciences",
+        "en": "Sciences"
+      },
+      "description": "Groupe de compétences scientifiques pour le collège",
+      "icon": "atom",
+      "color": "#06B6D4"
+    }
+  },
+  {
+    "name": "Groupe de Compétences - Lettres",
+    "code": "COMP_LETTRES_COLLEGE",
+    "category": "COMPETENCE_GROUP",
+    "cycle": "COLLEGE",
+    "subSystem": "FRANCOPHONE",
+    "applicableLevelCodes": ["6EME", "5EME", "4EME", "3EME"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Lettres",
+        "en": "Literary Studies"
+      },
+      "description": "Groupe de compétences littéraires pour le collège",
+      "icon": "book-open",
+      "color": "#EC4899"
+    }
+  }
+]

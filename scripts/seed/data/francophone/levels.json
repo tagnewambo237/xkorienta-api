@@ -1,0 +1,197 @@
+[
+  {
+    "name": "Sixième",
+    "code": "6EME",
+    "cycle": "COLLEGE",
+    "subSystem": "FRANCOPHONE",
+    "order": 1,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "6ème",
+        "en": "Form 1 (Francophone)"
+      },
+      "description": "Première année du collège - Cycle d'observation"
+    }
+  },
+  {
+    "name": "Cinquième",
+    "code": "5EME",
+    "cycle": "COLLEGE",
+    "subSystem": "FRANCOPHONE",
+    "order": 2,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "5ème",
+        "en": "Form 2 (Francophone)"
+      },
+      "description": "Deuxième année du collège"
+    }
+  },
+  {
+    "name": "Quatrième",
+    "code": "4EME",
+    "cycle": "COLLEGE",
+    "subSystem": "FRANCOPHONE",
+    "order": 3,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "4ème",
+        "en": "Form 3 (Francophone)"
+      },
+      "description": "Troisième année du collège"
+    }
+  },
+  {
+    "name": "Troisième",
+    "code": "3EME",
+    "cycle": "COLLEGE",
+    "subSystem": "FRANCOPHONE",
+    "order": 4,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "3ème",
+        "en": "Form 4 (Francophone)"
+      },
+      "description": "Dernière année du collège - Préparation au BEPC"
+    }
+  },
+  {
+    "name": "Seconde",
+    "code": "2NDE",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 5,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "2nde",
+        "en": "Form 5 (Francophone)"
+      },
+      "description": "Première année du lycée - Classe de détermination"
+    }
+  },
+  {
+    "name": "Première A",
+    "code": "1ERE_A",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 6,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "1ère A",
+        "en": "Lower Sixth A (Francophone)"
+      },
+      "description": "Série Littéraire - Première année du cycle terminal"
+    }
+  },
+  {
+    "name": "Première C",
+    "code": "1ERE_C",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 7,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "1ère C",
+        "en": "Lower Sixth C (Francophone)"
+      },
+      "description": "Série Scientifique (Maths-Sciences Physiques)"
+    }
+  },
+  {
+    "name": "Première D",
+    "code": "1ERE_D",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 8,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "1ère D",
+        "en": "Lower Sixth D (Francophone)"
+      },
+      "description": "Série Scientifique (Maths-Sciences Naturelles)"
+    }
+  },
+  {
+    "name": "Première TI",
+    "code": "1ERE_TI",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 9,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "1ère TI",
+        "en": "Lower Sixth TI (Francophone)"
+      },
+      "description": "Série Technique Industrielle"
+    }
+  },
+  {
+    "name": "Terminale A",
+    "code": "TLE_A",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 10,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Tle A",
+        "en": "Upper Sixth A (Francophone)"
+      },
+      "description": "Série Littéraire - Année du Baccalauréat"
+    }
+  },
+  {
+    "name": "Terminale C",
+    "code": "TLE_C",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 11,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Tle C",
+        "en": "Upper Sixth C (Francophone)"
+      },
+      "description": "Série Scientifique (Maths-Sciences Physiques) - Baccalauréat"
+    }
+  },
+  {
+    "name": "Terminale D",
+    "code": "TLE_D",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 12,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Tle D",
+        "en": "Upper Sixth D (Francophone)"
+      },
+      "description": "Série Scientifique (Maths-Sciences Naturelles) - Baccalauréat"
+    }
+  },
+  {
+    "name": "Terminale TI",
+    "code": "TLE_TI",
+    "cycle": "LYCEE",
+    "subSystem": "FRANCOPHONE",
+    "order": 13,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Tle TI",
+        "en": "Upper Sixth TI (Francophone)"
+      },
+      "description": "Série Technique Industrielle - Baccalauréat Technique"
+    }
+  }
+]

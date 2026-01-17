@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Arts Stream",
+    "code": "ARTS_STREAM",
+    "category": "SPECIALITY",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "applicableLevelCodes": ["LOWER_SIXTH_ARTS", "UPPER_SIXTH_ARTS"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Arts Stream",
+        "en": "Arts Stream"
+      },
+      "description": "Humanities and Arts - Literature, History, Geography",
+      "icon": "palette",
+      "color": "#8B5CF6"
+    }
+  },
+  {
+    "name": "Science Stream",
+    "code": "SCIENCE_STREAM",
+    "category": "SPECIALITY",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "applicableLevelCodes": ["LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_SCIENCE"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Science Stream",
+        "en": "Science Stream"
+      },
+      "description": "Pure Sciences - Mathematics, Physics, Chemistry, Biology",
+      "icon": "flask",
+      "color": "#3B82F6"
+    }
+  },
+  {
+    "name": "General Studies",
+    "code": "GENERAL_STUDIES",
+    "category": "COMPETENCE_GROUP",
+    "cycle": "COLLEGE",
+    "subSystem": "ANGLOPHONE",
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "General Studies",
+        "en": "General Studies"
+      },
+      "description": "General competencies for Forms 1-5",
+      "icon": "academic-cap",
+      "color": "#10B981"
+    }
+  }
+]

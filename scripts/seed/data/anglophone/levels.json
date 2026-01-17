@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Form 1",
+    "code": "FORM_1",
+    "cycle": "COLLEGE",
+    "subSystem": "ANGLOPHONE",
+    "order": 1,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Form 1",
+        "en": "Form 1"
+      },
+      "description": "First year of secondary school"
+    }
+  },
+  {
+    "name": "Form 2",
+    "code": "FORM_2",
+    "cycle": "COLLEGE",
+    "subSystem": "ANGLOPHONE",
+    "order": 2,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Form 2",
+        "en": "Form 2"
+      },
+      "description": "Second year of secondary school"
+    }
+  },
+  {
+    "name": "Form 3",
+    "code": "FORM_3",
+    "cycle": "COLLEGE",
+    "subSystem": "ANGLOPHONE",
+    "order": 3,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Form 3",
+        "en": "Form 3"
+      },
+      "description": "Third year of secondary school"
+    }
+  },
+  {
+    "name": "Form 4",
+    "code": "FORM_4",
+    "cycle": "COLLEGE",
+    "subSystem": "ANGLOPHONE",
+    "order": 4,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Form 4",
+        "en": "Form 4"
+      },
+      "description": "Fourth year - Preparation for GCE O-Level"
+    }
+  },
+  {
+    "name": "Form 5",
+    "code": "FORM_5",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "order": 5,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Form 5",
+        "en": "Form 5"
+      },
+      "description": "Fifth year - GCE O-Level year"
+    }
+  },
+  {
+    "name": "Lower Sixth Arts",
+    "code": "LOWER_SIXTH_ARTS",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "order": 6,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Lower Sixth Arts",
+        "en": "Lower Sixth Arts"
+      },
+      "description": "First year of A-Level - Arts stream"
+    }
+  },
+  {
+    "name": "Lower Sixth Science",
+    "code": "LOWER_SIXTH_SCIENCE",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "order": 7,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Lower Sixth Science",
+        "en": "Lower Sixth Science"
+      },
+      "description": "First year of A-Level - Science stream"
+    }
+  },
+  {
+    "name": "Upper Sixth Arts",
+    "code": "UPPER_SIXTH_ARTS",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "order": 8,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Upper Sixth Arts",
+        "en": "Upper Sixth Arts"
+      },
+      "description": "Second year of A-Level - Arts stream - GCE A-Level"
+    }
+  },
+  {
+    "name": "Upper Sixth Science",
+    "code": "UPPER_SIXTH_SCIENCE",
+    "cycle": "LYCEE",
+    "subSystem": "ANGLOPHONE",
+    "order": 9,
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Upper Sixth Science",
+        "en": "Upper Sixth Science"
+      },
+      "description": "Second year of A-Level - Science stream - GCE A-Level"
+    }
+  }
+]

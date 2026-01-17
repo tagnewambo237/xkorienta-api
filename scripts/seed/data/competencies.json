@@ -1,0 +1,274 @@
+[
+  {
+    "name": "Compétence Numérique",
+    "code": "COMP_DIGITAL",
+    "type": "DIGITAL",
+    "description": "Utilisation des outils numériques et technologies de l'information",
+    "relatedSubjectCodes": ["INFO", "COMP_SCI"],
+    "assessmentCriteria": [
+      {
+        "criterion": "Utilisation des logiciels bureautiques",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Recherche d'information en ligne",
+        "weight": 0.2
+      },
+      {
+        "criterion": "Pensée algorithmique",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Sécurité numérique",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Compétence Numérique",
+        "en": "Digital Competence"
+      },
+      "icon": "computer",
+      "category": "21st Century Skills"
+    }
+  },
+  {
+    "name": "Entrepreneuriat",
+    "code": "COMP_ENTREPRENEURIAL",
+    "type": "ENTREPRENEURIAL",
+    "description": "Esprit d'initiative et capacité à entreprendre",
+    "relatedSubjectCodes": [],
+    "assessmentCriteria": [
+      {
+        "criterion": "Identification d'opportunités",
+        "weight": 0.25
+      },
+      {
+        "criterion": "Prise d'initiative",
+        "weight": 0.25
+      },
+      {
+        "criterion": "Gestion de projet",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Innovation",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Entrepreneuriat",
+        "en": "Entrepreneurship"
+      },
+      "icon": "lightbulb",
+      "category": "21st Century Skills"
+    }
+  },
+  {
+    "name": "Pensée Critique",
+    "code": "COMP_CRITICAL_THINKING",
+    "type": "SOFT_SKILL",
+    "description": "Capacité d'analyse, de réflexion et d'argumentation",
+    "relatedSubjectCodes": ["PHILO", "FRANCAIS", "ENGLISH_LIT"],
+    "assessmentCriteria": [
+      {
+        "criterion": "Analyse de situations complexes",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Argumentation structurée",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Évaluation de sources",
+        "weight": 0.2
+      },
+      {
+        "criterion": "Synthèse d'informations",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Pensée Critique",
+        "en": "Critical Thinking"
+      },
+      "icon": "brain",
+      "category": "Cognitive Skills"
+    }
+  },
+  {
+    "name": "Résolution de Problèmes",
+    "code": "COMP_PROBLEM_SOLVING",
+    "type": "PROBLEM_SOLVING",
+    "description": "Capacité à résoudre des problèmes complexes",
+    "relatedSubjectCodes": ["MATH", "MATHEMATICS", "PC", "PHYSICS", "CHEMISTRY"],
+    "assessmentCriteria": [
+      {
+        "criterion": "Identification du problème",
+        "weight": 0.2
+      },
+      {
+        "criterion": "Planification de la solution",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Mise en œuvre de la solution",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Évaluation des résultats",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Résolution de Problèmes",
+        "en": "Problem Solving"
+      },
+      "icon": "puzzle",
+      "category": "Cognitive Skills"
+    }
+  },
+  {
+    "name": "Raisonnement Logique",
+    "code": "COMP_LOGIC_REASONING",
+    "type": "LOGIC_REASONING",
+    "description": "Capacité de raisonnement logique et déductif",
+    "relatedSubjectCodes": ["MATH", "MATHEMATICS", "INFO", "COMP_SCI"],
+    "assessmentCriteria": [
+      {
+        "criterion": "Raisonnement déductif",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Raisonnement inductif",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Logique formelle",
+        "weight": 0.2
+      },
+      {
+        "criterion": "Abstraction",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Raisonnement Logique",
+        "en": "Logical Reasoning"
+      },
+      "icon": "circuit-board",
+      "category": "Cognitive Skills"
+    }
+  },
+  {
+    "name": "Communication",
+    "code": "COMP_COMMUNICATION",
+    "type": "SOFT_SKILL",
+    "description": "Capacité à communiquer efficacement à l'oral et à l'écrit",
+    "relatedSubjectCodes": ["FRANCAIS", "ANGLAIS", "ENGLISH_LANG", "FRENCH"],
+    "assessmentCriteria": [
+      {
+        "criterion": "Expression orale",
+        "weight": 0.25
+      },
+      {
+        "criterion": "Expression écrite",
+        "weight": 0.25
+      },
+      {
+        "criterion": "Écoute active",
+        "weight": 0.25
+      },
+      {
+        "criterion": "Adaptation au public",
+        "weight": 0.25
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Communication",
+        "en": "Communication"
+      },
+      "icon": "chat",
+      "category": "Soft Skills"
+    }
+  },
+  {
+    "name": "Collaboration",
+    "code": "COMP_COLLABORATION",
+    "type": "SOFT_SKILL",
+    "description": "Capacité à travailler en équipe",
+    "relatedSubjectCodes": [],
+    "assessmentCriteria": [
+      {
+        "criterion": "Travail en équipe",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Respect des autres",
+        "weight": 0.2
+      },
+      {
+        "criterion": "Contribution active",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Gestion de conflits",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Collaboration",
+        "en": "Collaboration"
+      },
+      "icon": "users",
+      "category": "Soft Skills"
+    }
+  },
+  {
+    "name": "Créativité",
+    "code": "COMP_CREATIVITY",
+    "type": "SOFT_SKILL",
+    "description": "Capacité à générer des idées nouvelles et originales",
+    "relatedSubjectCodes": [],
+    "assessmentCriteria": [
+      {
+        "criterion": "Pensée divergente",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Innovation",
+        "weight": 0.3
+      },
+      {
+        "criterion": "Flexibilité mentale",
+        "weight": 0.2
+      },
+      {
+        "criterion": "Originalité",
+        "weight": 0.2
+      }
+    ],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Créativité",
+        "en": "Creativity"
+      },
+      "icon": "sparkles",
+      "category": "Soft Skills"
+    }
+  }
+]

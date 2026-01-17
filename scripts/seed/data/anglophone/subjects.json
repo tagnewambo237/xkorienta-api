@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Mathematics",
+    "code": "MATHEMATICS",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_ARTS", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_ARTS", "UPPER_SIXTH_SCIENCE"],
+    "applicableFieldCodes": ["ARTS_STREAM", "SCIENCE_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Mathematics",
+        "en": "Mathematics"
+      },
+      "description": "Pure and Applied Mathematics",
+      "icon": "calculator",
+      "color": "#3B82F6",
+      "coefficient": 4
+    }
+  },
+  {
+    "name": "Physics",
+    "code": "PHYSICS",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_SCIENCE"],
+    "applicableFieldCodes": ["SCIENCE_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Physics",
+        "en": "Physics"
+      },
+      "description": "Physical sciences",
+      "icon": "atom",
+      "color": "#8B5CF6",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "Chemistry",
+    "code": "CHEMISTRY",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_SCIENCE"],
+    "applicableFieldCodes": ["SCIENCE_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Chemistry",
+        "en": "Chemistry"
+      },
+      "description": "Chemical sciences",
+      "icon": "flask",
+      "color": "#06B6D4",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "Biology",
+    "code": "BIOLOGY",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_SCIENCE"],
+    "applicableFieldCodes": ["SCIENCE_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Biology",
+        "en": "Biology"
+      },
+      "description": "Life sciences",
+      "icon": "microscope",
+      "color": "#10B981",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "English Language",
+    "code": "ENGLISH_LANG",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_ARTS", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_ARTS", "UPPER_SIXTH_SCIENCE"],
+    "applicableFieldCodes": ["ARTS_STREAM", "SCIENCE_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "English Language",
+        "en": "English Language"
+      },
+      "description": "English grammar, composition, and comprehension",
+      "icon": "book-open",
+      "color": "#EC4899",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "English Literature",
+    "code": "ENGLISH_LIT",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["FORM_4", "FORM_5", "LOWER_SIXTH_ARTS", "UPPER_SIXTH_ARTS"],
+    "applicableFieldCodes": ["ARTS_STREAM"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "English Literature",
+        "en": "English Literature"
+      },
+      "description": "Study of literary works",
+      "icon": "book",
+      "color": "#A855F7",
+      "coefficient": 3
+    }
+  },
+  {
+    "name": "French",
+    "code": "FRENCH",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_ARTS", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_ARTS"],
+    "applicableFieldCodes": ["ARTS_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "French",
+        "en": "French"
+      },
+      "description": "French language",
+      "icon": "globe",
+      "color": "#F59E0B",
+      "coefficient": 2
+    }
+  },
+  {
+    "name": "History",
+    "code": "HISTORY",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_ARTS", "UPPER_SIXTH_ARTS"],
+    "applicableFieldCodes": ["ARTS_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "History",
+        "en": "History"
+      },
+      "description": "World and African history",
+      "icon": "clock",
+      "color": "#D946EF",
+      "coefficient": 2
+    }
+  },
+  {
+    "name": "Geography",
+    "code": "GEOGRAPHY",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": false,
+    "applicableLevelCodes": ["FORM_1", "FORM_2", "FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_ARTS", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_ARTS"],
+    "applicableFieldCodes": ["ARTS_STREAM", "GENERAL_STUDIES"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Geography",
+        "en": "Geography"
+      },
+      "description": "Physical and human geography",
+      "icon": "map",
+      "color": "#0EA5E9",
+      "coefficient": 2
+    }
+  },
+  {
+    "name": "Computer Science",
+    "code": "COMP_SCI",
+    "subSystem": "ANGLOPHONE",
+    "subjectType": "DISCIPLINE",
+    "isTransversal": true,
+    "applicableLevelCodes": ["FORM_3", "FORM_4", "FORM_5", "LOWER_SIXTH_SCIENCE", "UPPER_SIXTH_SCIENCE"],
+    "applicableFieldCodes": ["SCIENCE_STREAM"],
+    "isActive": true,
+    "metadata": {
+      "displayName": {
+        "fr": "Computer Science",
+        "en": "Computer Science"
+      },
+      "description": "Programming and algorithms",
+      "icon": "code",
+      "color": "#14B8A6",
+      "coefficient": 2
+    }
+  }
+]
