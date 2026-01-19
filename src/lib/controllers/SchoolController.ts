@@ -33,4 +33,17 @@ export class SchoolController {
             return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
         }
     }
+
+    static async getTeacherSchools(teacherId: string) {
+        try {
+            const schools = await SchoolService.getTeacherSchools(teacherId);
+            return NextResponse.json({ success: true, data: schools });
+        } catch (error: any) {
+            console.error("[School Controller] Get Teacher Schools Error:", error);
+            return NextResponse.json(
+                { success: false, message: error.message || "Internal server error" },
+                { status: 500 }
+            );
+        }
+    }
 }

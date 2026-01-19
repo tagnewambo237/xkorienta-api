@@ -1,19 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { SchoolService } from "@/lib/services/SchoolService";
+import connectDB from "@/lib/mongodb";
+import { SchoolController } from "@/lib/controllers/SchoolController";
+import { UserRole } from "@/models/enums";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
     const session = await getServerSession(authOptions);
-    if (!session || !session.user?.id) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    if (!session?.user?.id || session.user.role !== UserRole.TEACHER) {
+        return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
     }
 
-    try {
-        const schools = await SchoolService.getTeacherSchools(session.user.id);
-        return NextResponse.json(schools);
-    } catch (error) {
-        console.error("Error fetching user schools:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-    }
+    await connectDB();
+    return SchoolController.getTeacherSchools(session.user.id);
 }
