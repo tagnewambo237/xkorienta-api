@@ -6,6 +6,7 @@ import Option from "@/models/Option"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { z } from "zod"
+import { UserRole } from "@/models/enums"
 
 const examSchema = z.object({
     title: z.string().min(3),
@@ -28,6 +29,49 @@ const examSchema = z.object({
         })
     ),
 })
+
+export async function GET(req: Request) {
+    try {
+        const session = await getServerSession(authOptions)
+
+        if (!session?.user?.id) {
+            return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+        }
+
+        await connectDB()
+
+        let query = {}
+
+        // Role-based filtering
+        if (session.user.role === UserRole.TEACHER) {
+            query = { createdById: session.user.id }
+        } else if (session.user.role === UserRole.STUDENT) {
+            // Students should generally use /api/student/exams
+            // But if they access this, generic list or forbidden?
+            // Let's return Forbidden to encourage correct usage, or empty implementation
+            return NextResponse.json(
+                { success: false, message: "Students should use /api/student/exams" },
+                { status: 403 }
+            )
+        }
+
+        const exams = await Exam.find(query).sort({ createdAt: -1 }).lean()
+
+        const formattedExams = exams.map((exam: any) => ({
+            ...exam,
+            id: exam._id.toString(),
+        }))
+
+        return NextResponse.json({ success: true, data: formattedExams })
+
+    } catch (error: any) {
+        console.error("Get Exams Error:", error)
+        return NextResponse.json(
+            { success: false, message: error.message || "Internal server error" },
+            { status: 500 }
+        )
+    }
+}
 
 export async function POST(req: Request) {
     try {

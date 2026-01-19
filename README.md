@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quizlock API - Backend
 
-## Getting Started
+Backend API pour l'application Quizlock, construit avec Next.js.
 
-First, run the development server:
+## 🚀 Démarrage
+
+### Prérequis
+
+- Node.js 18+ 
+- MongoDB
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Installer les dépendances
+npm install
+
+# Copier le fichier d'environnement
+cp .env.example .env
+
+# Modifier .env avec vos vraies valeurs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Éditez le fichier `.env` avec vos configurations :
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | URL de connexion MongoDB |
+| `NEXTAUTH_URL` | URL du backend (http://localhost:3001) |
+| `NEXTAUTH_SECRET` | Secret pour JWT (générer avec `openssl rand -base64 32`) |
+| `FRONTEND_URL` | URL du frontend (http://localhost:3000) |
 
-## Learn More
+### Lancement
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Mode développement (port 3001)
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Mode production
+npm run build
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📚 API Endpoints
 
-## Deploy on Vercel
+Tous les endpoints sont disponibles sous `/api/*` :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Endpoint | Description |
+|----------|-------------|
+| `/api/auth/*` | Authentification (NextAuth) |
+| `/api/classes/*` | Gestion des classes |
+| `/api/exams/*` | Gestion des examens |
+| `/api/attempts/*` | Tentatives d'examen |
+| `/api/students/*` | Profils étudiants |
+| `/api/teachers/*` | Profils enseignants |
+| `/api/schools/*` | Établissements scolaires |
+| `/api/subjects/*` | Matières |
+| `/api/syllabus/*` | Programmes |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔒 CORS
+
+Le backend est configuré pour accepter les requêtes depuis le frontend sur `http://localhost:3000`.
+
+Pour ajouter d'autres origines, modifiez `src/middleware.ts`.
+
+## 📦 Structure
+
+```
+src/
+├── app/
+│   └── api/          # Routes API
+├── lib/
+│   ├── services/     # Services métier
+│   ├── security/     # Sécurité (rate limiting, sanitization)
+│   └── auth/         # Stratégies d'authentification
+├── models/           # Modèles Mongoose
+└── middleware.ts     # Middleware CORS
+```
+
+## 🔗 Communication avec le Frontend
+
+Le frontend (`quizlock-app`) communique avec ce backend via des requêtes HTTP.
+
+**Base URL**: `http://localhost:3001` (développement)
+
+---
+
+*Backend API de Quizlock - Xkorin School*

@@ -11,9 +11,23 @@ export class SchoolService {
      * Get School Stats
      * Returns: Total Students, Total Teachers, Active Classes, Average Score
      */
-    /**
-     * Get School Stats & Details
-     */
+    static async searchSchools(search?: string, type?: string) {
+        const query: any = { isActive: true };
+
+        if (type) {
+            query.type = type;
+        }
+
+        if (search) {
+            query.name = { $regex: search, $options: 'i' };
+        }
+
+        // TODO: Move query logic to SchoolRepository completely
+        return School.find(query)
+            .populate('admins', 'name email')
+            .sort({ name: 1 })
+            .lean();
+    }
     static async getSchoolStats(schoolId: string) {
         // 1. Basic Counts
         const school = await School.findById(schoolId).select('-teachers -admins');
