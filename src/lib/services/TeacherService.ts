@@ -12,6 +12,18 @@ export interface TeacherStudent {
     }>;
 }
 
+export interface StudentWithClass {
+    id: string;
+    name: string;
+    email: string;
+    image?: string;
+    studentCode?: string;
+    createdAt?: string;
+    className: string;
+    classId: string;
+    levelName: string;
+}
+
 export interface ClassOption {
     _id: string;
     name: string;
@@ -20,7 +32,13 @@ export interface ClassOption {
 
 export interface TeacherStudentsResult {
     students: TeacherStudent[];
+    studentsWithClass: StudentWithClass[];
     classes: ClassOption[];
+    stats: {
+        totalStudents: number;
+        totalClasses: number;
+        averagePerClass: number;
+    };
 }
 
 export class TeacherService {
@@ -50,17 +68,45 @@ export class TeacherService {
         ])];
 
         if (allClassIds.length === 0) {
-            return { students: [], classes: [] };
+            return {
+                students: [],
+                studentsWithClass: [],
+                classes: [],
+                stats: {
+                    totalStudents: 0,
+                    totalClasses: 0,
+                    averagePerClass: 0
+                }
+            };
         }
 
         // 4. Fetch classes with students
         const classes = await repo.findClassesWithStudents(allClassIds, classId);
 
-        // 5. Build students list with class info
+        // 5. Build students list with class info (grouped by student)
         const studentsMap = new Map<string, TeacherStudent>();
 
+        // 6. Build flat list for studentsWithClass (one entry per student per class)
+        const studentsWithClass: StudentWithClass[] = [];
+
         for (const cls of classes) {
-            const classStudents = (cls.students || []) as any[];
+            const classData = cls as unknown as {
+                _id?: { toString: () => string };
+                name: string;
+                level?: { name: string };
+                students?: Array<{
+                    _id?: { toString: () => string };
+                    name?: string;
+                    email?: string;
+                    image?: string;
+                    studentCode?: string;
+                    createdAt?: Date | string;
+                }>;
+            };
+
+            const classStudents = classData.students || [];
+            const levelName = classData.level?.name || '';
+
             for (const student of classStudents) {
                 const studentId = student._id?.toString();
                 if (!studentId) continue;
@@ -74,11 +120,12 @@ export class TeacherService {
                     if (!matchName && !matchEmail && !matchCode) continue;
                 }
 
+                // For grouped students map
                 if (!studentsMap.has(studentId)) {
                     studentsMap.set(studentId, {
                         _id: studentId,
-                        name: student.name,
-                        email: student.email,
+                        name: student.name || 'Sans nom',
+                        email: student.email || '',
                         image: student.image,
                         studentCode: student.studentCode,
                         classes: []
@@ -86,24 +133,60 @@ export class TeacherService {
                 }
 
                 studentsMap.get(studentId)!.classes.push({
-                    _id: cls._id?.toString(),
-                    name: cls.name
+                    _id: classData._id?.toString() || '',
+                    name: classData.name
+                });
+
+                // For flat list (studentsWithClass)
+                studentsWithClass.push({
+                    id: studentId,
+                    name: student.name || 'Sans nom',
+                    email: student.email || '',
+                    image: student.image,
+                    studentCode: student.studentCode,
+                    createdAt: student.createdAt
+                        ? (typeof student.createdAt === 'string'
+                            ? student.createdAt
+                            : student.createdAt.toISOString())
+                        : undefined,
+                    className: classData.name,
+                    classId: classData._id?.toString() || '',
+                    levelName
                 });
             }
         }
 
         const students = Array.from(studentsMap.values());
 
-        // 6. Build class options for filter dropdown
-        const classOptions: ClassOption[] = classes.map(c => ({
-            _id: c._id?.toString(),
-            name: c.name,
-            studentCount: ((c.students || []) as any[]).length
-        }));
+        // 7. Build class options for filter dropdown
+        const classOptions: ClassOption[] = classes.map(c => {
+            const classData = c as unknown as {
+                _id?: { toString: () => string };
+                name: string;
+                students?: unknown[];
+            };
+            return {
+                _id: classData._id?.toString() || '',
+                name: classData.name,
+                studentCount: (classData.students || []).length
+            };
+        });
+
+        // 8. Calculate stats
+        const totalClasses = classes.length;
+        const totalStudents = studentsWithClass.length;
+        const averagePerClass = totalClasses > 0 ? Math.round(totalStudents / totalClasses) : 0;
 
         return {
             students,
-            classes: classOptions
+            studentsWithClass,
+            classes: classOptions,
+            stats: {
+                totalStudents,
+                totalClasses,
+                averagePerClass
+            }
         };
     }
 }
+

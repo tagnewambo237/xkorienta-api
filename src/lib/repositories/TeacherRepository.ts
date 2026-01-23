@@ -13,7 +13,7 @@ export class TeacherRepository {
             mainTeacher: teacherId,
             isActive: true
         }).distinct('_id');
-        
+
         return classIds.map(id => id.toString());
     }
 
@@ -45,8 +45,9 @@ export class TeacherRepository {
         }
 
         return Class.find(query)
-            .populate('students', 'name email image studentCode')
-            .select('name students')
+            .populate('students', 'name email image studentCode createdAt')
+            .populate('level', 'name')
+            .select('name students level')
             .lean();
     }
 
@@ -72,7 +73,7 @@ export class TeacherRepository {
             role: 'TEACHER',
             isActive: true
         }).select('_id').lean();
-        
+
         return teachers.map(t => t._id.toString());
     }
 }
