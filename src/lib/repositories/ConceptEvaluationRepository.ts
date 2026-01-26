@@ -1,4 +1,4 @@
-import ConceptEvaluation, { IConceptEvaluation } from "@/models/ConceptEvaluation";
+import ConceptEvaluation, { IConceptEvaluation, MasteryLevel } from "@/models/ConceptEvaluation";
 import connectDB from "@/lib/mongodb";
 import mongoose from "mongoose";
 
@@ -10,7 +10,7 @@ export class ConceptEvaluationRepository {
         student: string;
         concept: string;
         syllabus?: string;
-        level: string;
+        level: MasteryLevel;
         reflection?: string;
         evaluatedAt?: Date;
     }): Promise<IConceptEvaluation> {
@@ -40,7 +40,7 @@ export class ConceptEvaluationRepository {
      * Update an existing evaluation
      */
     async update(evaluation: IConceptEvaluation, data: {
-        level: string;
+        level: MasteryLevel;
         reflection?: string;
         evaluatedAt?: Date;
     }): Promise<IConceptEvaluation> {

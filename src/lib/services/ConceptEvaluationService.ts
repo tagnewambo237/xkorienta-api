@@ -11,7 +11,7 @@ export interface CreateConceptEvaluationData {
 
 export interface SaveSelfAssessmentData {
     conceptId: string;
-    level: string;
+    level: MasteryLevel;
     reflection?: string;
     syllabusId?: string;
 }

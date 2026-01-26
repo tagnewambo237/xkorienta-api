@@ -1,4 +1,4 @@
-import { Cycle, SubSystem, SubscriptionStatus, UserRole } from "@/models/enums";
+import { AccessScope, Cycle, SubSystem, SubscriptionStatus, UserRole } from "@/models/enums";
 import { UserRepository } from "@/lib/repositories/UserRepository";
 import { EducationLevelRepository } from "@/lib/repositories/EducationLevelRepository";
 import { LearnerProfileRepository } from "@/lib/repositories/LearnerProfileRepository";
@@ -117,7 +117,7 @@ export class OnboardingService {
                 await this.pedagogicalProfileRepository.create({
                     user: user._id,
                     contributionTypes: [],
-                    accessScope: 'SUBJECT',
+                    accessScope: AccessScope.SUBJECT,
                     scopeDetails: {
                         specificSubjects: [],
                         specificLevels: [],
