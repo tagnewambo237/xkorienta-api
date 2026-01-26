@@ -57,8 +57,11 @@ export class ClassService {
 
     /**
      * Get classes for a teacher
+     * Now includes performance data for each class
      */
     static async getTeacherClasses(teacherId: string) {
+        const Attempt = mongoose.models.Attempt || mongoose.model('Attempt');
+
         const classes = await Class.find({ mainTeacher: teacherId })
             .populate('level', 'name code')
             .populate('school', 'name')
@@ -68,11 +71,86 @@ export class ClassService {
             .sort({ createdAt: -1 })
             .lean()
 
-        // Add studentsCount to each class
-        return classes.map((cls: any) => ({
-            ...cls,
-            studentsCount: cls.students?.length || 0
-        }))
+        // For each class, compute performance stats
+        const classesWithStats = await Promise.all(classes.map(async (cls: any) => {
+            const studentIds = cls.students?.map((s: any) => s._id) || [];
+
+            // Skip stats if no students
+            if (studentIds.length === 0) {
+                return {
+                    ...cls,
+                    studentsCount: 0,
+                    averageScore: 0,
+                    examsCount: 0,
+                    performanceHistory: []
+                };
+            }
+
+            // Get global average and performance history in one aggregation
+            const [globalStats, performanceHistory] = await Promise.all([
+                // Global stats
+                Attempt.aggregate([
+                    {
+                        $match: {
+                            userId: { $in: studentIds },
+                            status: 'COMPLETED'
+                        }
+                    },
+                    {
+                        $group: {
+                            _id: null,
+                            averageScore: { $avg: "$percentage" },
+                            totalAttempts: { $sum: 1 }
+                        }
+                    }
+                ]),
+                // Performance history (last 7 exams for chart)
+                Attempt.aggregate([
+                    {
+                        $match: {
+                            userId: { $in: studentIds },
+                            status: 'COMPLETED'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: "exams",
+                            localField: "examId",
+                            foreignField: "_id",
+                            as: "exam"
+                        }
+                    },
+                    { $unwind: "$exam" },
+                    {
+                        $group: {
+                            _id: "$exam._id",
+                            date: { $first: "$submittedAt" },
+                            value: { $avg: "$percentage" }
+                        }
+                    },
+                    { $sort: { date: -1 } },
+                    { $limit: 7 },
+                    { $sort: { date: 1 } } // Re-sort chronologically for chart
+                ])
+            ]);
+
+            // Count distinct exams
+            const distinctExams = await Attempt.distinct('examId', {
+                userId: { $in: studentIds }
+            });
+
+            return {
+                ...cls,
+                studentsCount: studentIds.length,
+                averageScore: globalStats.length > 0 ? Math.round(globalStats[0].averageScore * 10) / 10 : 0,
+                examsCount: distinctExams.length,
+                performanceHistory: performanceHistory.map((p: any) => ({
+                    value: Math.round(p.value)
+                }))
+            };
+        }));
+
+        return classesWithStats;
     }
 
     /**
