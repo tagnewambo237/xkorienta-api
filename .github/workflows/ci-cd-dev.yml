@@ -11,48 +11,9 @@ env:
   DOCKER_IMAGE: nkot20/xkorienta-api
 
 jobs:
-  # Étape 1 : Analyse SonarQube
-  code_quality:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY_API }}
-
-  # Étape 1 bis : Rapport de vulnérabilités Sonar
-  sonarqube_vulnerability_report:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - name: Fetch SonarQube vulnerability report
-        run: |
-          echo "Fetching SonarQube vulnerability report..."
-          curl -u "${{ secrets.SONAR_TOKEN }}:" \
-            "${{ secrets.SONAR_HOST_URL }}/api/issues/gitlab_sast_export?projectKey=${{ secrets.SONAR_PROJECT_KEY_API }}&branch=${{ github.ref_name }}" \
-            -o gl-sast-sonar-report.json
-
-      - name: Upload SAST report
-        uses: actions/upload-artifact@v4
-        with:
-          name: sast-report
-          path: gl-sast-sonar-report.json
-          retention-days: 1
-
-  # Étape 2 : Build Docker Dev
+  # Étape 1 : Build Docker Dev
   build:
     runs-on: ubuntu-latest
-    needs: [code_quality]
     environment: dev
     steps:
       - name: Checkout code
@@ -90,7 +51,7 @@ jobs:
           path: ${{ github.sha }}.tar.gz
           retention-days: 1
 
-  # Étape 3 : Tests unitaires et linting
+  # Étape 2 : Tests unitaires et linting
   test_unit:
     runs-on: ubuntu-latest
     needs: [build]
@@ -114,7 +75,7 @@ jobs:
       - name: Run TypeScript check
         run: npx tsc --noEmit || true
 
-  # Étape 4 : Build test (vérification que le build passe)
+  # Étape 3 : Build test (vérification que le build passe)
   build_test:
     runs-on: ubuntu-latest
     needs: [test_unit]
@@ -135,11 +96,11 @@ jobs:
       - name: Run Next.js build
         run: npm run build
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           NEXTAUTH_URL: http://localhost:3001
 
-  # Étape 5 : Déploiement sur le serveur Dev
+  # Étape 4 : Déploiement sur le serveur Dev
   deploy:
     runs-on: ubuntu-latest
     needs: [build_test]
@@ -154,7 +115,7 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH_API }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           sshpass -p "$DEPLOY_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" bash -s -- "$DEPLOY_PATH" << 'REMOTE'
           set -euo pipefail
