@@ -36,8 +36,7 @@ jobs:
           tags: ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
           build-args: |
             NODE_ENV=dev
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          no-cache: true
 
       - name: Create source archive
         run: |
