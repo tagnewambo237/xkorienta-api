@@ -56,4 +56,21 @@ export class AuthController {
             );
         }
     }
+
+    static async verifyGoogle(req: Request) {
+        try {
+            const body = await req.json();
+            const { idToken, user } = body || {};
+
+            const data = await authService.verifyGoogle(idToken, user);
+            return NextResponse.json(data);
+        } catch (error: any) {
+            console.error("[AuthController] Google Verify Error:", error);
+            const status = error.status || 500;
+            return NextResponse.json(
+                { message: error.message || "Internal server error" },
+                { status }
+            );
+        }
+    }
 }
