@@ -39,14 +39,23 @@ export class GoogleAuthStrategy extends BaseAuthStrategy {
         try {
             await connectDB()
 
+            const email = profile?.email?.toLowerCase()
+            if (!email) {
+                console.warn("[GoogleStrategy] Missing email in Google profile")
+                return false
+            }
+
             // Check if user exists
-            let user = await User.findOne({ email: profile.email })
+            let user = await User.findOne({ email })
 
             if (user) {
                 // Update existing user with Google info
                 user.name = profile.name || user.name
                 user.image = profile.picture || user.image
                 user.googleId = profile.sub
+                if (typeof profile.email_verified === "boolean") {
+                    user.emailVerified = profile.email_verified
+                }
 
                 // If user doesn't have a role yet, they will be redirected to onboarding
                 // if (!user.role) {
@@ -58,7 +67,7 @@ export class GoogleAuthStrategy extends BaseAuthStrategy {
                 // Create new user from Google profile
                 user = await User.create({
                     name: profile.name,
-                    email: profile.email.toLowerCase(),
+                    email,
                     image: profile.picture,
                     googleId: profile.sub,
                     // role: "STUDENT", // Removed default role assignment
