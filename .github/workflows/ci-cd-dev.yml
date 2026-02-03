@@ -119,6 +119,23 @@ jobs:
             exit 1
           fi
 
+      - name: Create deploy archive
+        run: |
+          # Create a tarball with docker-compose.yml and .env
+          tar -czf deploy-files.tar.gz docker-compose.yml .env
+
+      - name: Upload deploy files to server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          echo "=== Uploading deploy files to server ==="
+          sshpass -p "$DEPLOY_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p $DEPLOY_PATH"
+          sshpass -p "$DEPLOY_PASSWORD" scp -o StrictHostKeyChecking=no -P "$DEPLOY_PORT" deploy-files.tar.gz "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
+
       - name: Deploy to dev server
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
@@ -165,8 +182,11 @@ jobs:
           sleep 2
           docker info | egrep -i "Storage Driver|Server Version|containerd-snapshotter" || true
 
-          echo "=== Déploiement (docker compose) ==="
+          echo "=== Extracting deploy files ==="
           cd "$DEPLOY_PATH"
+          tar -xzf deploy-files.tar.gz
+          
+          echo "=== Déploiement (docker compose) ==="
           if docker compose version >/dev/null 2>&1; then
             docker compose down || true
             docker compose pull app
