@@ -1,10 +1,13 @@
 import mongoose from 'mongoose'
 import { initEventSystem } from './events'
 
-const MONGODB_URI = process.env.DATABASE_URL!
+const MONGODB_URI = process.env.DATABASE_URL
 
-if (!MONGODB_URI) {
-    throw new Error('Please define the DATABASE_URL environment variable inside .env')
+// Only throw error at runtime, not during build
+if (!MONGODB_URI && typeof window === 'undefined' && process.env.NODE_ENV !== 'production') {
+    // During build, we allow missing DATABASE_URL by providing a dummy value
+    // The real connection will happen at runtime
+    console.warn('[MongoDB] DATABASE_URL not set - using placeholder for build')
 }
 
 /**
@@ -19,6 +22,11 @@ if (!cached) {
 }
 
 async function connectDB() {
+    // Check DATABASE_URL at runtime
+    if (!MONGODB_URI) {
+        throw new Error('DATABASE_URL environment variable is not defined')
+    }
+
     // If mongoose is already connected (e.g., in tests), return immediately
     if (mongoose.connection.readyState === 1) {
         return mongoose

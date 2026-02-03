@@ -108,6 +108,17 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
+      - name: Check deploy variables
+        run: |
+          if [ -z "${{ secrets.DEPLOY_PATH }}" ]; then
+            echo "❌ Error: DEPLOY_PATH secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.DEPLOY_HOST }}" ]; then
+            echo "❌ Error: DEPLOY_HOST secret is not set"
+            exit 1
+          fi
+
       - name: Deploy to dev server
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
