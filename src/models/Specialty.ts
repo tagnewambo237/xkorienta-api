@@ -55,11 +55,11 @@ const SpecialtySchema = new Schema<ISpecialty>(
             required: true,
             min: 1
         },
-        language: {
+        language: [{
             type: String,
             required: true,
             trim: true
-        },
+        }],
         mode: {
             type: String,
             enum: Object.values(SpecialtyMode),
