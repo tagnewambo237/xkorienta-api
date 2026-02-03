@@ -124,8 +124,8 @@ jobs:
 
       - name: Create deploy archive
         run: |
-          # Create a tarball with docker-compose.yml and .env
-          tar -czf deploy-files.tar.gz docker-compose.yml .env
+          # Create tarball with only docker-compose.yml (not .env - managed manually on server)
+          tar -czf deploy-files.tar.gz docker-compose.yml
 
       - name: Upload deploy files to server
         env:
@@ -187,7 +187,8 @@ jobs:
 
           echo "=== Extracting deploy files ==="
           cd "$DEPLOY_PATH"
-          tar -xzf deploy-files.tar.gz
+          # Extract only docker-compose.yml, preserve existing .env on server
+          tar -xzf deploy-files.tar.gz docker-compose.yml
           
           echo "=== Déploiement (docker compose) ==="
           if docker compose version >/dev/null 2>&1; then
