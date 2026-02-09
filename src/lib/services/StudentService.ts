@@ -59,14 +59,46 @@ export class StudentService {
 
         // 1. Find all classes the student is enrolled in
         const classes = await repo.findStudentClasses(studentId);
+        console.log(`[StudentService] Found ${classes.length} active classes for student ${studentId}`);
 
         if (classes.length === 0) {
+            console.log('[StudentService] No classes found, returning empty subjects');
             return [];
         }
 
         // 2. Get all syllabi for these classes
         const classIds = classes.map(c => c._id);
-        const syllabi = await repo.findSyllabiByClasses(classIds);
+        console.log(`[StudentService] Class IDs: ${classIds.map(id => id.toString()).join(', ')}`);
+
+        let syllabi = await repo.findSyllabiByClasses(classIds);
+        console.log(`[StudentService] Found ${syllabi.length} syllabi associated with these classes`);
+
+        // If no syllabi found via classes, try via teachers
+        if (syllabi.length === 0) {
+            // Get all teacher IDs from classes
+            const teacherIds: mongoose.Types.ObjectId[] = [];
+            for (const cls of classes) {
+                const classData = cls as any;
+                // Add mainTeacher
+                if (classData.mainTeacher) {
+                    teacherIds.push(classData.mainTeacher);
+                }
+                // Add collaborating teachers
+                if (classData.teachers && Array.isArray(classData.teachers)) {
+                    for (const t of classData.teachers) {
+                        if (t.teacher) {
+                            teacherIds.push(t.teacher);
+                        }
+                    }
+                }
+            }
+            
+            if (teacherIds.length > 0) {
+                console.log(`[StudentService] Trying to find syllabi via ${teacherIds.length} teachers`);
+                syllabi = await repo.findSyllabiByTeachers(teacherIds);
+                console.log(`[StudentService] Found ${syllabi.length} syllabi via teachers`);
+            }
+        }
 
         // 3. Get unique subjects
         const subjectMap = new Map<string, {
@@ -221,7 +253,7 @@ export class StudentService {
             const level = studentClassData.level as { toString: () => string };
             const schoolId = (school._id as { toString: () => string }).toString();
             const levelId = level.toString();
-            
+
             const schoolLeaderboard = await LeaderboardService.getSchoolLevelLeaderboard(
                 schoolId,
                 levelId,
@@ -242,7 +274,7 @@ export class StudentService {
         try {
             const level = studentClassData.level as { toString: () => string };
             const levelId = level.toString();
-            
+
             const nationalLeaderboard = await LeaderboardService.getNationalLevelLeaderboard(
                 levelId,
                 studentId
@@ -503,7 +535,7 @@ export class StudentService {
         const studentClass = await classRepo.findStudentClass(studentId);
 
         const classId = studentClass ? (studentClass as unknown as Record<string, unknown>)._id?.toString() || null : null;
-        const schoolId = studentClass ? (studentClass as unknown as Record<string, unknown>).school 
+        const schoolId = studentClass ? (studentClass as unknown as Record<string, unknown>).school
             ? ((studentClass as unknown as Record<string, unknown>).school as Record<string, unknown>)._id?.toString() || null
             : null : null;
         const levelId = studentClass ? (studentClass as unknown as Record<string, unknown>).level
@@ -560,6 +592,54 @@ export class StudentService {
         });
 
         return formattedChallenges;
+    }
+
+    /**
+     * Join a challenge
+     */
+    static async joinChallenge(studentId: string, challengeId: string) {
+        const challengeRepo = new ChallengeRepository();
+
+        // 1. Check if challenge exists and is active
+        const challenge = await challengeRepo.findById(challengeId);
+        if (!challenge) {
+            throw new Error("Challenge not found");
+        }
+
+        const challengeData = challenge as unknown as Record<string, unknown>;
+        if (challengeData.status !== ChallengeStatus.ACTIVE) {
+            throw new Error("Challenge is not active");
+        }
+
+        // 2. Check if already joined
+        const existingProgress = await challengeRepo.findStudentChallengeProgress(studentId, challengeId);
+        if (existingProgress) {
+            throw new Error("Already participating in this challenge");
+        }
+
+        // 3. Add student to participants
+        await challengeRepo.addParticipant(challengeId, studentId);
+
+        // 4. Create progress record
+        const goals = challengeData.goals as Array<{ target: number; description: string }>;
+        const progress = goals.map((goal, index) => ({
+            goalIndex: index,
+            current: 0,
+            target: goal.target,
+            completed: false
+        }));
+
+        await challengeRepo.createChallengeProgress({
+            userId: new mongoose.Types.ObjectId(studentId),
+            challengeId: new mongoose.Types.ObjectId(challengeId),
+            progress,
+            overallProgress: 0,
+            completed: false,
+            startedAt: new Date(),
+            lastUpdated: new Date()
+        });
+
+        return { success: true, message: "Successfully joined challenge" };
     }
 
     /**
