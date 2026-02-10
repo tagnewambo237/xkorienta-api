@@ -55,6 +55,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
             duration: examDoc.duration,
             closeMode: examDoc.closeMode,
             config: examDoc.config,
+            pedagogicalObjective: examDoc.pedagogicalObjective,
             createdById: examDoc.createdById.toString(),
             createdAt: examDoc.createdAt.toISOString(),
             updatedAt: examDoc.updatedAt.toISOString(),

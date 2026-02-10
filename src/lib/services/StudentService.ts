@@ -92,7 +92,7 @@ export class StudentService {
                     }
                 }
             }
-            
+
             if (teacherIds.length > 0) {
                 console.log(`[StudentService] Trying to find syllabi via ${teacherIds.length} teachers`);
                 syllabi = await repo.findSyllabiByTeachers(teacherIds);
@@ -250,9 +250,9 @@ export class StudentService {
         // School level ranking
         try {
             const school = studentClassData.school as Record<string, unknown>;
-            const level = studentClassData.level as { toString: () => string };
+            const level = studentClassData.level as Record<string, unknown>;
             const schoolId = (school._id as { toString: () => string }).toString();
-            const levelId = level.toString();
+            const levelId = (level._id as { toString: () => string }).toString();
 
             const schoolLeaderboard = await LeaderboardService.getSchoolLevelLeaderboard(
                 schoolId,
@@ -272,8 +272,8 @@ export class StudentService {
 
         // National ranking
         try {
-            const level = studentClassData.level as { toString: () => string };
-            const levelId = level.toString();
+            const level = studentClassData.level as Record<string, unknown>;
+            const levelId = (level._id as { toString: () => string }).toString();
 
             const nationalLeaderboard = await LeaderboardService.getNationalLevelLeaderboard(
                 levelId,
@@ -376,7 +376,7 @@ export class StudentService {
         const studentClassData = studentClass as unknown as Record<string, unknown>;
         const classId = (studentClassData._id as { toString: () => string }).toString();
         const school = studentClassData.school as Record<string, unknown>;
-        const level = studentClassData.level as { toString: () => string };
+        const level = studentClassData.level as Record<string, unknown>;
 
         // Convert string to enum if needed
         const leaderboardType = type as LeaderboardType;
@@ -393,7 +393,7 @@ export class StudentService {
 
             case LeaderboardType.SCHOOL_LEVEL:
                 const schoolId = (school._id as { toString: () => string }).toString();
-                const levelId = level.toString();
+                const levelId = (level._id as { toString: () => string }).toString();
                 return await LeaderboardService.getSchoolLevelLeaderboard(
                     schoolId,
                     levelId,
@@ -402,7 +402,7 @@ export class StudentService {
                 );
 
             case LeaderboardType.NATIONAL_LEVEL:
-                const nationalLevelId = level.toString();
+                const nationalLevelId = (level._id as { toString: () => string }).toString();
                 return await LeaderboardService.getNationalLevelLeaderboard(
                     nationalLevelId,
                     studentId,
@@ -479,18 +479,18 @@ export class StudentService {
         return uniqueExams.map(e => {
             const examId = e._id.toString();
             const examAttempts = attemptsByExamId.get(examId) || [];
-            
+
             // Calculate resultsBlocked for this exam
             const examData = e as any;
             const lateDuration = examData.config?.lateDuration || 0;
             const delayResultsUntilLateEnd = examData.config?.delayResultsUntilLateEnd ?? false;
             const examEndTime = new Date(examData.endTime);
             const lateEndTime = addMinutes(examEndTime, lateDuration);
-            
+
             const examEnded = isPast(examEndTime);
             const inLatePeriod = examEnded && isAfter(lateEndTime, now) && lateDuration > 0;
             const resultsBlocked = !examEnded || (delayResultsUntilLateEnd && inLatePeriod);
-            
+
             return {
                 ...e,
                 id: examId,

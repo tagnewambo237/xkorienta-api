@@ -7,6 +7,7 @@ import Question from "@/models/Question";
 import Option from "@/models/Option";
 import Attempt from "@/models/Attempt";
 import Response from "@/models/Response";
+import Concept from "@/models/Concept";
 import { HuggingFaceService, type ReformulationIntensity } from "@/lib/services/HuggingFaceService";
 
 interface RouteParams {
@@ -111,6 +112,20 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
             }
         }
 
+        // Fetch linked concepts if self-assessment is enabled
+        let linkedConcepts: any[] = [];
+        if (examDoc.config?.enableSelfAssessment && examDoc.linkedConcepts && examDoc.linkedConcepts.length > 0) {
+            const conceptsDoc = await Concept.find({
+                _id: { $in: examDoc.linkedConcepts }
+            }).select('_id title description').lean();
+
+            linkedConcepts = conceptsDoc.map(c => ({
+                id: c._id.toString(),
+                title: c.title,
+                description: c.description
+            }));
+        }
+
         const exam = {
             id: examDoc._id.toString(),
             title: examDoc.title,
@@ -120,6 +135,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
             duration: examDoc.duration,
             closeMode: examDoc.closeMode,
             config: examDoc.config,
+            pedagogicalObjective: examDoc.pedagogicalObjective,
+            syllabusId: examDoc.syllabus?.toString(),
+            linkedConcepts,
             createdById: examDoc.createdById.toString(),
             createdAt: examDoc.createdAt.toISOString(),
             updatedAt: examDoc.updatedAt.toISOString(),

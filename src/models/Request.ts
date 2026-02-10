@@ -44,10 +44,10 @@ export interface IRequest extends Document {
     // Participants
     studentId: mongoose.Types.ObjectId
     teacherId?: mongoose.Types.ObjectId  // Optional for external requests (claimed later)
-    
+
     // Teacher type
     teacherType?: TeacherType
-    
+
     // Payment info (for external teachers)
     payment?: {
         amount: number
@@ -85,6 +85,16 @@ export interface IRequest extends Document {
         comment?: string
     }
 
+    // In-ticket conversation
+    messages: {
+        _id?: mongoose.Types.ObjectId
+        sender: mongoose.Types.ObjectId
+        senderName?: string
+        senderRole?: 'student' | 'teacher'
+        content: string
+        sentAt: Date
+    }[]
+
     createdAt: Date
     updatedAt: Date
 }
@@ -109,8 +119,8 @@ const RequestSchema = new Schema<IRequest>(
         payment: {
             amount: { type: Number, default: 0 },
             currency: { type: String, default: 'XOF' },
-            status: { 
-                type: String, 
+            status: {
+                type: String,
                 enum: ['PENDING', 'PAID', 'FAILED'],
                 default: 'PENDING'
             },
@@ -189,7 +199,30 @@ const RequestSchema = new Schema<IRequest>(
                 type: String,
                 maxlength: 500
             }
-        }
+        },
+        messages: [{
+            sender: {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+            senderName: {
+                type: String
+            },
+            senderRole: {
+                type: String,
+                enum: ['student', 'teacher']
+            },
+            content: {
+                type: String,
+                required: true,
+                maxlength: 5000
+            },
+            sentAt: {
+                type: Date,
+                default: Date.now
+            }
+        }]
     },
     {
         timestamps: true

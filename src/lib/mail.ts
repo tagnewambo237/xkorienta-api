@@ -71,7 +71,7 @@ const emailWrapper = (title: string, subtitle: string, content: string) => `
         </div>
         
         <div style="${STYLES.footer}">
-            <p style="${STYLES.footerText}">© ${new Date().getFullYear()} Xkorin School. Tous droits réservés.</p>
+            <p style="${STYLES.footerText}">© ${new Date().getFullYear()} Xkorienta. Tous droits réservés.</p>
             <p style="${STYLES.footerText}">Cet email a été envoyé automatiquement pour vous informer des activités liées à votre compte.</p>
             <div style="margin-top: 16px;">
                  <a href="${process.env.NEXT_PUBLIC_APP_URL}" style="color: ${COLORS.primary}; text-decoration: none; font-size: 13px; font-weight: 600;">Accéder à la plateforme</a>
@@ -85,7 +85,7 @@ const emailWrapper = (title: string, subtitle: string, content: string) => `
 export const sendEmail = async ({ to, subject, html }: MailOptions) => {
     try {
         const info = await transporter.sendMail({
-            from: `"${process.env.MAIL_FROM_NAME || 'Xkorin School'}" <${process.env.MAIL_SOURCE || 'contact@xkorin.com'}>`,
+            from: `"${process.env.MAIL_FROM_NAME || 'Xkorienta'}" <${process.env.MAIL_SOURCE || 'contact@xkorin.com'}>`,
             to,
             subject,
             html,
@@ -344,8 +344,8 @@ export const sendTeacherAddedEmail = async (
     subjectNames: string[],
     loginUrl: string
 ) => {
-    const subjectsList = subjectNames.length > 0 
-        ? `<p style="${STYLES.infoBoxText}"><strong>📚 Matière(s) :</strong> ${subjectNames.join(', ')}</p>` 
+    const subjectsList = subjectNames.length > 0
+        ? `<p style="${STYLES.infoBoxText}"><strong>📚 Matière(s) :</strong> ${subjectNames.join(', ')}</p>`
         : '';
 
     const content = `
@@ -385,8 +385,8 @@ export const sendTeacherActivationEmail = async (
     subjectNames: string[],
     activationLink: string
 ) => {
-    const subjectsList = subjectNames.length > 0 
-        ? `<p style="${STYLES.infoBoxText}"><strong>📚 Matière(s) :</strong> ${subjectNames.join(', ')}</p>` 
+    const subjectsList = subjectNames.length > 0
+        ? `<p style="${STYLES.infoBoxText}"><strong>📚 Matière(s) :</strong> ${subjectNames.join(', ')}</p>`
         : '';
 
     const content = `
@@ -453,3 +453,32 @@ export const sendTeacherWelcomeEmail = async (
     const html = emailWrapper("Bienvenue enseignant !", `Votre compte est actif`, content);
     return sendEmail({ to: email, subject: `Votre compte enseignant est activé`, html });
 };
+
+// Réinitialisation du mot de passe
+export const sendPasswordResetEmail = async (email: string, userName: string, resetUrl: string) => {
+    const content = `
+        <p>Bonjour <strong>${userName}</strong>,</p>
+        <p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour créer un nouveau mot de passe :</p>
+        
+        <div style="text-align: center;">
+            <a href="${resetUrl}" style="${STYLES.button}">Réinitialiser mon mot de passe</a>
+        </div>
+        
+        <div style="${STYLES.infoBox}; background-color: #FFFBEB; border-color: #FCD34D;">
+            <div style="${STYLES.infoBoxTitle}; color: #D97706;">⏰ Expiration</div>
+            <p style="${STYLES.infoBoxText}">Ce lien est valide pendant <strong>1 heure</strong>. Passé ce délai, vous devrez faire une nouvelle demande.</p>
+        </div>
+        
+        <div style="${STYLES.infoBox}; background-color: #FEF2F2; border-color: #FECACA;">
+            <div style="${STYLES.infoBoxTitle}; color: ${COLORS.error};">🔒 Sécurité</div>
+            <p style="${STYLES.infoBoxText}">Si vous n'avez pas demandé cette réinitialisation, ignorez simplement cet email. Votre mot de passe restera inchangé.</p>
+        </div>
+        
+        <p style="text-align: center; color: ${COLORS.gray}; font-size: 14px;">Si le bouton ne fonctionne pas, copiez ce lien : <br>
+        <a href="${resetUrl}" style="color: ${COLORS.primary}; word-break: break-all;">${resetUrl}</a></p>
+    `;
+
+    const html = emailWrapper("Réinitialisation du mot de passe", "Créez un nouveau mot de passe", content);
+    return sendEmail({ to: email, subject: `Réinitialisation de votre mot de passe`, html });
+};
+
